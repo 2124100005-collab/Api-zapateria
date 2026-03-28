@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
@@ -22,4 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/{userId}', [OrderController::class, 'index']);
     Route::get('/orders/{userId}/{orderId}', [OrderController::class, 'show']);
     Route::put('/orders/{userId}/{orderId}/cancel', [OrderController::class, 'cancel']);
+
+    Route::post('/orders/{userId}/{orderId}/pay', [PaymentController::class, 'pay']);
+    Route::post('/orders/{userId}/{orderId}/capture', [PaymentController::class, 'capture']);
 });
